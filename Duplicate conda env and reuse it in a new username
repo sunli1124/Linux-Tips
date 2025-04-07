@@ -1,11 +1,42 @@
-"""创建用户"""
 
-'''
+"""创建用户"""
+https://cloud.tencent.com/developer/article/1611042
 adduser newuser
-'''
+
+设置sudo权限
+adduser newuser sudo
+
 
 """删除用户"""
+https://blog.csdn.net/Joker_Mr/article/details/78225260
+'''
+adddel -r newuser
+'''
 
-'''
-adddel newuser
-'''
+复制conda环境并迁移
+https://www.cnblogs.com/dawnlh/p/17341647.html
+1、安装conda-pack: conda install -c conda-forge conda-pack 或者 pip install conda-pack
+2、将my_env环境打包生成一个my_env.tar.gz 的压缩文件，保存在当前路径下：conda pack -n <my_env>
+3、在新电脑上的anaconda的env目录下创建my_env文件夹：mkdir my_env
+4、将压缩包解压到这个目录：tar -xzvf my_env -C ~/anaconda3/envs/my_env
+5、查看迁移环境是否存在：conda info -e
+
+
+配置不同用户的ssh端口和权限
+1、编辑/etc/ssh/sshd_config，添加字段Port和AllowUsers,如下，即可实现user1只能通过2222端口连接，user只能通过2223端口连接
+Port 2222
+AllowUsers user1
+Port 2223
+AllowUsers user2
+
+
+2、重启ssh
+sudo systemctl restart ssh
+
+
+3、ssh连接命令
+ssh -p 2222 user1@ip
+
+
+4、scp连接
+scp test.tgz -P 2223 user2@ip:/path/to/directory 

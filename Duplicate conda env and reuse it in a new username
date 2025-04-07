@@ -1,0 +1,11 @@
+"""创建用户"""
+
+'''
+adduser newuser
+'''
+
+"""删除用户"""
+
+'''
+adddel newuser
+'''

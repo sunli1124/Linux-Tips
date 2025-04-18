@@ -23,11 +23,17 @@ https://www.cnblogs.com/dawnlh/p/17341647.html
 
 
 配置不同用户的ssh端口和权限
-1、编辑/etc/ssh/sshd_config，添加字段Port和AllowUsers,如下，即可实现user1只能通过2222端口连接，user只能通过2223端口连接
+1、编辑/etc/ssh/sshd_config，添加字段Port和AllowUsers,如下，即可实现user1只能通过2222端口连接，user2只能通过2223端口连接
 Port 2222
-AllowUsers user1
 Port 2223
-AllowUsers user2
+Port 2224
+
+Match LocalPort 2222
+    AllowUsers user1
+Match LocalPort 2223
+    AllowUsers user2
+Match LocalPort 2224
+    AllowUsers user3
 
 
 2、重启ssh
